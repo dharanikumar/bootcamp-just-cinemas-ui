@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import configureStore from './store';
 import createHistory from 'history/createBrowserHistory'
 import Header from './Header'
+import Footer from './Footer'
 import Home from './Home'
 
 const browserHistory = createHistory()
@@ -21,6 +22,7 @@ const Main = () => (
   <div>
     <Header />
     <Routes />
+    <Footer/>
   </div>  
 );
 
