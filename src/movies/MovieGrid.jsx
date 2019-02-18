@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import MovieItem from './MovieItem';
 import { connect } from 'react-redux';
 import fetchMovies from './actions';
-
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 class MovieGrid extends Component {
 
   componentDidMount() {
@@ -21,9 +22,14 @@ class MovieGrid extends Component {
   showMovies() {
     return (
       <div>
-        {this.props.movies.items.map(({ name, slug }) => (
-          <MovieItem key={name} name={name} slug={slug} />
-        ))}
+          <Grid container  spacing={8}>
+                    {this.props.movies.items.map(({ name, slug }) => (
+                    <Grid  xs={2} justify="center" spacing={Number(2)}>
+                        <MovieItem name={name} slug={slug}/>
+                    </Grid>                  
+                  ))}
+               </Grid>
+
       </div>
     );
   }

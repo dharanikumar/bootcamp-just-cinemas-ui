@@ -22,3 +22,4 @@ it('renders Footer without crashing', () => {
   ReactDOM.render(<Footer />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
+
