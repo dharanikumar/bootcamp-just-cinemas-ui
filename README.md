@@ -13,7 +13,6 @@ To add a dependency to your project
 ```yarn add <dep name>```
 
 
-
 ## Follow the below steps to deploy it
 
 1. Fork the repository
