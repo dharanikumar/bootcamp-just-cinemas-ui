@@ -28,6 +28,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "test_with_coverage": "CI=true react-scripts test --env=jsdom --coverage"
+    "test_with_coverage": "CI=true react-scripts test --env=jsdom --coverage",
+    "lint": "eslint --fix src/**/*.js src/**/*.jsx"
+  },
+  "devDependencies": {
+    "eslint": "^5.14.1",
+    "eslint-plugin-react": "^7.12.4"
   }
 }

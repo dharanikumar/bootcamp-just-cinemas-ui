@@ -1,12 +1,12 @@
-import React from 'react';
-import MovieGrid from '../movies/MovieGrid';
+import React from 'react'
+import MovieGrid from '../movies/MovieGrid'
 
 const Home = () => (
   <div>
     <MovieGrid />
   </div>  
-);
+)
 
-Home.defaultProps = {};
+Home.defaultProps = {}
 
-export default Home;
+export default Home
