@@ -1,5 +1,3 @@
-
-/* global describe, it, expect, beforeEach */
 import fetchMovies, { FETCH_MOVIES_PROGRESS, FETCH_MOVIES_SUCCESS, FETCH_MOVIES_FAILURE } from '../movies/actions'
 import MockAdapter from 'axios-mock-adapter'
 import thunk from 'redux-thunk'
