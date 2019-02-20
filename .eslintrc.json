@@ -1,20 +1,29 @@
 {
     "env": {
         "browser": true,
+<<<<<<< HEAD
         "es6": true,
         "node": true,
         "jest": true
+||||||| merged common ancestors
+        "es6": true
+=======
+        "es6": true,
+        "jest": true,
+        "node": true
+>>>>>>> Kunal-Tushar eslint issues fixed
     },
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended"
     ],
+    "parser": "babel-eslint",
     "parserOptions": {
+        "sourceType": "module",
         "ecmaFeatures": {
             "experimentalObjectRestSpread": true,
             "jsx": true
-        },
-        "sourceType": "module"
+        }
     },
     "plugins": [
         "react"

@@ -1,5 +1,7 @@
-.app {
+.app-container {
   text-align: center;
+  margin: auto;
+   max-width: 1500px;
 }
 
 .App-logo {
@@ -14,9 +16,7 @@
   color: white;
 }
 
-.App-title {
-  font-size: 1.5em;
-}
+
 
 .App-intro {
   font-size: large;
