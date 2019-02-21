@@ -13,7 +13,7 @@ const setLocationsAction = (locations) => ({
   payload: locations,
 })
 
-const locationDataFetchFailure = 'FETCH_LOCATIONDATA_FAILURE'
+const locationDataFetchFailure = {type:'FETCH_LOCATIONDATA_FAILURE'}
 
 export const getLocations = () => {
   return async dispatch => {

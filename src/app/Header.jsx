@@ -103,7 +103,7 @@ Header.propTypes = {
   classes: PropTypes.object.isRequired,
   fetchLocations: PropTypes.func,
   setLocation: PropTypes.func,
-  location: PropTypes.string,
+  location: PropTypes.object,
   locations: PropTypes.array
 }
 
