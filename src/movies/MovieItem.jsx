@@ -17,9 +17,11 @@ const styles = {
   },
 }
 
-function MovieItem({ name, slug, classes }) {
+function MovieItem({ movie, classes }) {
+
+  let {slug, name, experiences, id} = movie
   return (
-    <Link to='/movies'>
+    <Link to={`/movies/${id}`}>
       <Card className={classes.card}>
         <CardActionArea>
           <CardMedia
@@ -31,6 +33,9 @@ function MovieItem({ name, slug, classes }) {
             <Typography gutterBottom variant="h5" component="h2">
               {name}
             </Typography>
+            <Typography gutterBottom variant="h5" component="h2">
+              {experiences}
+            </Typography>
           </CardContent>
         </CardActionArea>
       </Card>
@@ -41,7 +46,8 @@ function MovieItem({ name, slug, classes }) {
 MovieItem.propTypes = {
   classes: PropTypes.object.isRequired,
   name: PropTypes.string,
-  slug: PropTypes.string
+  slug: PropTypes.string,
+  movie: PropTypes.object
 }
 
 export default withStyles(styles)(MovieItem)

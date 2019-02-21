@@ -4,9 +4,11 @@ import movieReducer from './movieReducer';
 import nowShowingMovies from './nowShowingMovies';
 import comingSoonMovies from './comingSoonMovies';
 import location from './location';
+import locations from './locations';
 
 const rootReducer = combineReducers({
   location,
+  locations,
   nowShowingMovies,
   comingSoonMovies,
   routing: routerReducer,

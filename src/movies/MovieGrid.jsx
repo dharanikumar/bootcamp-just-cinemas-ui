@@ -25,10 +25,18 @@ class MovieGrid extends Component {
 
   showMovies() {
     var { classes } = this.props
+    let { 
+      fetching, items
+    } = this.props.movies
+    if(fetching){
+      return(
+        <div>Loading...</div>
+      )
+    }
     return (
       <div>
         <Grid container spacing={8}>
-          {this.props.movies.items.map(({ name, slug }, index) => (
+          {items.map((movie, index) => (
             <Grid
               key={index}
               xs={2}
@@ -36,7 +44,7 @@ class MovieGrid extends Component {
               justify="center"
               spacing={Number(2)}
             >
-              <MovieItem name={name} slug={slug} />
+              <MovieItem movie={movie} slug={movie.slug} />
             </Grid>
           ))}
         </Grid>

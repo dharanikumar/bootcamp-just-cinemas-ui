@@ -9,16 +9,21 @@ import Header from './Header'
 import Footer from './Footer'
 import Home from './Home'
 import MovieDetails from '../movies/MovieDetails'
-
+import {loadState, saveState} from './localStorage'
 const browserHistory = createHistory()
+var initialState = loadState()
+const store = configureStore(browserHistory, initialState)
 
-const store = configureStore(browserHistory)
+store.subscribe(()=>{
+  let {location} =  store.getState()
+  saveState({location})
+})
 
 const Routes = () => (
   <ConnectedRouter history={browserHistory}>
     <Switch>
       <Route component={Home} exact path="/" />
-      <Route component={MovieDetails} path="/movies" />
+      <Route component={MovieDetails} path="/movies/:id" />
     </Switch>
   </ConnectedRouter>
 )

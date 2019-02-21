@@ -9,7 +9,6 @@ import { connect } from 'react-redux'
 import fetchNowShowingMovies from '../store/actions/nowShowingAction'
 import fetchComingSoonMovies from '../store/actions/comingSoonAction'
 
-
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -104,7 +103,8 @@ CustomizedTabs.propTypes = {
   nowShowingMovies: PropTypes.object,
   upComingMovies: PropTypes.object,
   fetchNowShowingMovies: PropTypes.func,
-  fetchComingSoonMovies: PropTypes.func
+  fetchComingSoonMovies: PropTypes.func,
+  fetchLocations: PropTypes.func
 
 }
 export default connect(

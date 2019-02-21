@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
+import { connect } from 'react-redux'
+
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
@@ -10,6 +12,7 @@ import OutlinedInput from '@material-ui/core/OutlinedInput'
 import InputLabel from '@material-ui/core/InputLabel'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
+import { getLocations, setLocation } from '../store/actions/locationAction'
 
 const styles = theme => ({
   root: {
@@ -30,24 +33,29 @@ const styles = theme => ({
 })
 class Header extends React.Component {
   state = {
-    age: '',
+    location: '',
     name: 'hai',
     labelWidth: 0,
   };
 
   componentDidMount() {
+    this.props.fetchLocations()
     this.setState({
       // eslint-disable-next-line
       labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
     })
   }
 
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.value })
+  handleChange = event => {
+    let locations = this.props.locations
+    let location = locations.filter((location)=> location.id == event.target.value)[0]
+    this.props.setLocation(location)
   };
 
   render() {
-    const { classes } = this.props
+    let { classes, locations, location } = this.props
+    
+    if(!Array.isArray(locations)) locations =[]
     return (
       <div className={classes.root}>
         <AppBar position="static" color='inherit'>
@@ -70,20 +78,19 @@ class Header extends React.Component {
               </InputLabel>
               <Select
                 native
-                value={this.state.age}
-                onChange={this.handleChange('age')}
+                value={location.id}
+                onChange={this.handleChange}
                 input={
                   <OutlinedInput
-                    name="age"
+                    name="location"
                     labelWidth={this.state.labelWidth}
                     id="location-selector"
                   />
                 }
               >
                 <option value="" />
-                <option value={'chennai'}>Chennai</option>
-                <option value={'pune'}>Pune</option>
-                <option value={'banglore'}>Banglore</option>
+                {locations.map((location)=><option key={location.id} value={location.id} >{location.name}</option>)}
+                
               </Select>
             </FormControl>
           </Toolbar>
@@ -94,6 +101,20 @@ class Header extends React.Component {
 }
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
+  fetchLocations: PropTypes.func,
+  setLocation: PropTypes.func,
+  location: PropTypes.string,
+  locations: PropTypes.array
 }
 
-export default withStyles(styles)(Header)
+var HeaderCmp =  withStyles(styles)(Header)
+export default connect(
+  (state) =>({
+    locations: state.locations,
+    location: state.location
+  }),
+  (dispatch) => ({
+    fetchLocations: () => dispatch(getLocations()),
+    setLocation: (location) => dispatch(setLocation(location))
+  })
+)(HeaderCmp)
