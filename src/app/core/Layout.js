@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 
 const styles = theme => {
-  let backgroundColor = theme.palette.type === 'dark' ? 'black' : '#e6ecf0'
   return ({
     root: {
       flexGrow: 1,
@@ -32,7 +31,7 @@ class Layout extends React.Component {
 
 
   
-  openModal = (username, e) => {
+  openModal = (username) => {
     this.setState({ open: true , username }, () => {})
   }
 

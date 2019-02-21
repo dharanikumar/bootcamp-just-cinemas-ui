@@ -5,13 +5,12 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogContent from '@material-ui/core/DialogContent'
 
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import OutlinedInput from '@material-ui/core/OutlinedInput'
+import InputLabel from '@material-ui/core/InputLabel'
+import FormControl from '@material-ui/core/FormControl'
+import Select from '@material-ui/core/Select'
 
 export default function DropDownDialog(props) {
-  let InputLabelRef;
   return (
     <Dialog open={props.open}>
       <DialogTitle id='form-dialog-title'>Select Location</DialogTitle>
@@ -25,7 +24,8 @@ export default function DropDownDialog(props) {
             native
             value={props.id}
             onChange={props.handleChange}
-            input={<OutlinedInput name='location' id='location-selector' />}
+
+            input={<OutlinedInput labelWidth={200} name='location' id='location-selector' />}
           >
             <option value='' />
             {props.options.map(option => (
@@ -38,4 +38,11 @@ export default function DropDownDialog(props) {
       </DialogContent>
     </Dialog>
   )
+}
+DropDownDialog.propTypes = {
+  options: PropTypes.array,
+  id: PropTypes.string,
+  open: PropTypes.bool,
+  handleChange: PropTypes.func,
+  classes: PropTypes.object
 }

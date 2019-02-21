@@ -33,7 +33,7 @@ class MovieGrid extends Component {
         <Layout col={6} >
           {items.map((movie) => (
           
-            <MovieItem key={movie.div} movie={movie} slug={movie.slug} />
+            <MovieItem key={movie.id} movie={movie} slug={movie.slug} />
          
           ))}
         </Layout>
