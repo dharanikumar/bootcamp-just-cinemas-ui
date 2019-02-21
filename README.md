@@ -1,17 +1,50 @@
+# Just Cinemas UI
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-## Just Cinemas UI
+## Prerequisites
 
-To run your project  
+- Node v8.15
+- Yarn
+
+## Running the Project
+
+To install the dependencies, run:
+
+```
+yarn install
+```
+
+To run your project
 ```yarn start```
 
-To run tests for your project  
-```yarn run test```  
+To run tests for your project
+```yarn run test```
+and select `a` to run all the tests.
+
 The tests will be started in the 'watch mode'. Everytime you make a change to any file in your project, the tests will be run.
 
-To add a dependency to your project  
-```yarn add <dep name>```
+To add a dependency to your project
+```
+yarn add <dep name>
+```
 
+## Linting
+
+The project uses eslint for linting. The linting process can be run by:
+
+```yarn lint```
+
+## Pushing Changes
+
+Before pushing changes to the remote, please make sure that all the tests pass, and code follows the predefined standards.
+Run:
+
+```
+yarn run test_with_coverage && yarn lint
+```
+
+before pushing the commit.
 
 ## Follow the below steps to deploy it
 
