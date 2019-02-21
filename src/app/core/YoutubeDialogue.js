@@ -24,9 +24,9 @@ class YoutubeDialog extends React.Component {
   }
 }
 
-YoutubeDialog.PropTypes = {
-  open: PropTypes.bool,
-  videoId: PropTypes.string
+YoutubeDialog.propTypes = {
+  open: PropTypes.bool.isRequired,
+  videoId: PropTypes.string.isRequired
 }
 
 export default YoutubeDialog
