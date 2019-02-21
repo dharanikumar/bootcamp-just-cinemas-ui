@@ -13,68 +13,78 @@ import InputLabel from '@material-ui/core/InputLabel'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 import { getLocations, setLocation } from '../store/actions/locationAction'
-
+import DropDownDialog from './core/DropDownDialog'
 const styles = theme => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   grow: {
-    flexGrow: 1,
-    
+    flexGrow: 1
   },
   menuButton: {
     marginLeft: -12,
-    marginRight: 20,
+    marginRight: 20
   },
   formControl: {
     margin: theme.spacing.unit,
-    minWidth: 180,
-  },
+    minWidth: 180
+  }
 })
 class Header extends React.Component {
   state = {
     location: '',
     name: 'hai',
-    labelWidth: 0,
-  };
+    labelWidth: 0
+  }
 
   componentDidMount() {
     this.props.fetchLocations()
     this.setState({
       // eslint-disable-next-line
-      labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
+      labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth
     })
   }
 
   handleChange = event => {
     let locations = this.props.locations
-    let location = locations.filter((location)=> location.id == event.target.value)[0]
+    let location = locations.filter(
+      location => location.id == event.target.value
+    )[0]
     this.props.setLocation(location)
-  };
+  }
 
   render() {
     let { classes, locations, location } = this.props
-    
-    if(!Array.isArray(locations)) locations =[]
+
+    if (!Array.isArray(locations)) locations = []
     return (
       <div className={classes.root}>
-        <AppBar position="static" color='inherit'>
+        <DropDownDialog open={!location.id} options={locations} handleChange={this.handleChange} classes={classes} id={location.id} />
+        <AppBar position='static' color='inherit'>
           <Toolbar>
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-              <img  src='logo.png'/>
-            
+            <IconButton
+              className={classes.menuButton}
+              color='inherit'
+              aria-label='Menu'
+            >
+              <img src='logo.png' />
             </IconButton>
-            <Typography variant='h4' style={{ fontWeight: 'bold', fontFamily: 'Helvetica Neue'}} align='left' className={classes.grow}>
-           JUST CINEMAS
+            <Typography
+              variant='h4'
+              style={{ fontWeight: 'bold', fontFamily: 'Helvetica Neue' }}
+              align='left'
+              className={classes.grow}
+            >
+              JUST CINEMAS
             </Typography>
-            <FormControl variant="outlined" className={classes.formControl}>
+            <FormControl variant='outlined' className={classes.formControl}>
               <InputLabel
                 ref={ref => {
                   this.InputLabelRef = ref
                 }}
-                htmlFor="location-selector"
+                htmlFor='location-selector'
               >
-            Select Location
+                Select Location
               </InputLabel>
               <Select
                 native
@@ -82,15 +92,18 @@ class Header extends React.Component {
                 onChange={this.handleChange}
                 input={
                   <OutlinedInput
-                    name="location"
+                    name='location'
                     labelWidth={this.state.labelWidth}
-                    id="location-selector"
+                    id='location-selector'
                   />
                 }
               >
-                <option value="" />
-                {locations.map((location)=><option key={location.id} value={location.id} >{location.name}</option>)}
-                
+                <option value='' />
+                {locations.map(location => (
+                  <option key={location.id} value={location.id}>
+                    {location.name}
+                  </option>
+                ))}
               </Select>
             </FormControl>
           </Toolbar>
@@ -107,14 +120,14 @@ Header.propTypes = {
   locations: PropTypes.array
 }
 
-var HeaderCmp =  withStyles(styles)(Header)
+var HeaderCmp = withStyles(styles)(Header)
 export default connect(
-  (state) =>({
+  state => ({
     locations: state.locations,
     location: state.location
   }),
-  (dispatch) => ({
+  dispatch => ({
     fetchLocations: () => dispatch(getLocations()),
-    setLocation: (location) => dispatch(setLocation(location))
+    setLocation: location => dispatch(setLocation(location))
   })
 )(HeaderCmp)

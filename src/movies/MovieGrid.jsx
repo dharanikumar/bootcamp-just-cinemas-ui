@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import MovieItem from './MovieItem'
-import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/core'
+import Layout from '../app/core/Layout'
 
 const styles = {
   row: {
@@ -24,30 +24,19 @@ class MovieGrid extends Component {
   }
 
   showMovies() {
-    var { classes } = this.props
-    let { 
-      fetching, items
-    } = this.props.movies
-    if(fetching){
-      return(
-        <div>Loading...</div>
-      )
+    let { fetching, items } = this.props.movies
+    if (fetching) {
+      return <div>Loading...</div>
     }
     return (
       <div>
-        <Grid container spacing={8}>
-          {items.map((movie, index) => (
-            <Grid
-              key={index}
-              xs={2}
-              className={classes.row}
-              justify="center"
-              spacing={Number(2)}
-            >
-              <MovieItem movie={movie} slug={movie.slug} />
-            </Grid>
+        <Layout col={6} >
+          {items.map((movie) => (
+          
+            <MovieItem key={movie.div} movie={movie} slug={movie.slug} />
+         
           ))}
-        </Grid>
+        </Layout>
       </div>
     )
   }

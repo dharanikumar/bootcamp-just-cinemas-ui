@@ -15,8 +15,7 @@ const styles = theme => {
       width: 100,
     },
     demo: {
-      backgroundColor: backgroundColor
-
+      marginTop: 50
     },
     control: {
       padding: theme.spacing.unit * 2,
@@ -31,11 +30,7 @@ class Layout extends React.Component {
     username : ''
   };
 
-  // handleChange = key => (event, value) => {
-  //   this.setState({
-  //     [key]: value,
-  //   });
-  // };
+
   
   openModal = (username, e) => {
     this.setState({ open: true , username }, () => {})
