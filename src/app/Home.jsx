@@ -110,7 +110,7 @@ CustomizedTabs.propTypes = {
 export default connect(
   (state) => ({
     nowShowingMovies: state.nowShowingMovies,
-    upComingMovies: state.upComingMovies,
+    upComingMovies: state.comingSoonMovies,
   }), 
   (dispatch) => ({
     fetchNowShowingMovies: () => dispatch(fetchNowShowingMovies()),
