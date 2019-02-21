@@ -8,8 +8,6 @@ import Layout from '../app/core/Layout'
 import YoutubeDialogue from '../app/core/YoutubeDialogue'
 // import axios from 'axios'
 
-const synopsis =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id cursus metus aliquam eleifend mi. Id diam vel quam elementum pulvinar etiam non quam lacus. Nisl condimentum id venenatis a condimentum vitae sapien. Neque aliquam vestibulum morbi blandit cursus.'
 const styles = theme => ({
   root: {
     flexGrow: 1
@@ -33,6 +31,7 @@ class MovieDetails extends React.Component {
     stills: [],
     clips: [],
     status: 'now-showing',
+    trailers: [],
     loading:true,
     open: false
   };
@@ -53,8 +52,8 @@ class MovieDetails extends React.Component {
     this.setState({loading:true})
     if (id) {
       this.fetchMovieDetails(id).then(resp => {
-        let { name, synopsis, bannerUrl, stills, clips, status } = resp.data
-        this.setState({ name, synopsis, bannerUrl, stills, clips, status, loading: false })
+        let { name, synopsis, bannerUrl, stills, clips, status, trailers } = resp.data
+        this.setState({ name, synopsis, bannerUrl, stills, clips, status, trailers, loading: false })
       }).catch(()=>{
         this.setState({loading:false})
       })
@@ -66,15 +65,36 @@ class MovieDetails extends React.Component {
     return new Promise((resolve, reject) => {
       setTimeout(function() {
         let movieDetail = {
+          // data: {
+          //   id:id,
+          //   name: 'Gully Boy',
+          //   synopsis: synopsis,
+          //   bannerUrl:
+          //     'https://img.spicinemas.in/resources/images/home/image-2.jpg',
+          //   stills: [],
+          //   clips: ['JfbxcD6biOk'],
+          //   status: 'now-showing'
+          // }
           data: {
-            id:id,
-            name: 'Gully Boy',
-            synopsis: synopsis,
-            bannerUrl:
-              'https://img.spicinemas.in/resources/images/home/image-2.jpg',
-            stills: [],
-            clips: ['JfbxcD6biOk'],
-            status: 'now-showing'
+            id: id ? id : 1,
+            name: 'Kabali',
+            synopsis: ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tortor est, feugiat sit amet sagittis nec, viverra vehicula orci. Sed pulvinar imperdiet nunc vel fringilla. In ac facilisis orci. Ut suscipit nisl scelerisque elit finibus, sed auctor velit placerat. Mauris et lacus in felis finibus dictum vel non mauris. Integer feugiat augue vitae mauris ultricies sodales. Nam semper tincidunt viverra. Aliquam pellentesque dolor nec tortor semper, sed rhoncus magna tincidunt.',
+            rating: 5,
+            experiences: 'RDX, Dolby Atmos, SUB',
+            bannerUrl: 'https://img.spicinemas.in/resources/images/movies/kabali/1000x320.jpg',
+            listingType: 'now showing',
+            stills:
+              [
+                {
+                  url: 'https://img.spicinemas.in/resources/images/movies/kabali/150x207.jpg'
+                }
+              ],
+            trailers:
+              [
+                {
+                  url: 'https://www.youtube.com/watch?v=JfbxcD6biOk'
+                }
+              ]
           }
         }
         
@@ -85,6 +105,13 @@ class MovieDetails extends React.Component {
 
   render() {
     const { classes } = this.props
+    if(this.state.loading){
+      return (
+        <div style={{height:'100vh'}}>
+          {/* <CircularProgress /> */}
+        </div>
+      )
+    }
     return (
       <div className={classes.root}>
         <Grid container spacing={24}>
@@ -120,14 +147,35 @@ class MovieDetails extends React.Component {
                 Trailers and Clips
               </Typography>
               <Layout col={3}>
-                <img src='http://i1.ytimg.com/vi/JfbxcD6biOk/default.jpg'  onClick={()=>{this.setState({open: true , videoId: 'JfbxcD6biOk'})}}/>
-                <img src='http://i2.ytimg.com/vi/JfbxcD6biOk/default.jpg' onClick={()=>{this.setState({open: true})}}/>
-                <img src='http://i3.ytimg.com/vi/JfbxcD6biOk/default.jpg' onClick={()=>{this.setState({open: true})}}/>
+                {this.state.trailers.map((trailer, index)=>{
+                  let videoId = trailer.url.match(/v=(.*)/g)[0].split('=')[1]
+                  return(
+                    <img key={index} src={`http://i1.ytimg.com/vi/${videoId}/default.jpg`}  onClick={()=>{this.setState({open: true , videoId})}}/>
+                  )
+                })}
+              </Layout>
+              <YoutubeDialogue videoId={this.state.videoId} open={this.state.open} />
+            </Paper>
+            <Paper className={classes.paper}>
+              <Typography
+                gutterBottom
+                align='left'
+                style={{ fontSize: '20px', fontWeight: 'bold' }}
+                variant='heading'
+              >
+                Stills
+              </Typography>
+              <Layout col={3}>
+                {this.state.stills.map((still, index)=>{
+                  return(
+                    <img key={index} src={still.url} />
+                  )
+                })}
               </Layout>
               <YoutubeDialogue videoId={this.state.videoId} open={this.state.open} />
             </Paper>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <Button
               variant='contained'
               color='secondary'

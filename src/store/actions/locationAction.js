@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios'
 
 export const SET_LOCATION = 'SET_LOCATION'
 export const SET_LOCATIONS = 'SET_LOCATIONS'

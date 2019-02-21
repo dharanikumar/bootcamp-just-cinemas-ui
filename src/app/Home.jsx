@@ -82,12 +82,10 @@ class CustomizedTabs extends React.Component {
           classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
         >
           <Tab
-            // disableRipple
             classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
             label="Now Showing"
           />
           <Tab
-            // disableRipple
             classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
             label="Upcoming"
           />
