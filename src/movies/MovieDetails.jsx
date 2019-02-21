@@ -107,8 +107,8 @@ class MovieDetails extends React.Component {
     const { classes } = this.props
     if(this.state.loading){
       return (
-        <div style={{height:'100vh'}}>
-          {/* <CircularProgress /> */}
+        <div style={{height:'100vh',marginTop:'100px'}}>
+          Loading...
         </div>
       )
     }
