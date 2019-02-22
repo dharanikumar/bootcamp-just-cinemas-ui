@@ -19,14 +19,14 @@ const styles = {
 
 function MovieItem({ movie, classes }) {
 
-  let {slug, name, experiences, id} = movie
+  let { name, experiences, id, iconUrl} = movie
   return (
     <Link to={`/movies/${id}`}>
       <Card className={classes.card}>
         <CardActionArea>
           <CardMedia
             className={classes.media}
-            image={`https://img.spicinemas.in/resources/images/movies/${slug}/150x207.jpg`}
+            image={iconUrl}
             title={name}
           />
           <CardContent>

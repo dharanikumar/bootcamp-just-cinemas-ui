@@ -43,7 +43,7 @@ class Layout extends React.Component {
     return (
       <Grid container className={classes.root} spacing={16}>
         <Grid item xs={12}>
-          <Grid container className={classes.demo} justify="center" spacing={Number(spacing)}>
+          <Grid container className={classes.demo} justify="left" spacing={Number(spacing)}>
             {React.Children.map(children, (child, index) => (
               <Grid key={index} xs={size} item>
                 {React.cloneElement(child, {openModal: this.openModal})}

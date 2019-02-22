@@ -9,6 +9,7 @@ import Header from './Header'
 import Footer from './Footer'
 import Home from './Home'
 import MovieDetails from '../movies/MovieDetails'
+import BookTicket from './BookTicketWizard/BookTicket'
 import {loadState, saveState} from './localStorage'
 const browserHistory = createHistory()
 var initialState = loadState()
@@ -24,6 +25,7 @@ const Routes = () => (
     <Switch>
       <Route component={Home} exact path="/" />
       <Route component={MovieDetails} path="/movies/:id" />
+      <Route component={BookTicket} path="/book/chennai/kabali" />
     </Switch>
   </ConnectedRouter>
 )

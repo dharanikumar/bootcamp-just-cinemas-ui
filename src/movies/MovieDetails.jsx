@@ -7,6 +7,7 @@ import { Typography, Button } from '@material-ui/core'
 import Layout from '../app/core/Layout'
 import YoutubeDialogue from '../app/core/YoutubeDialogue'
 import Axios from 'axios'
+import { Link } from 'react-router-dom'
 // import axios from 'axios'
 
 const styles = theme => ({
@@ -62,7 +63,8 @@ class MovieDetails extends React.Component {
             stills,
             clips,
             status,
-            trailers
+            trailers,
+            iconUrl
           } = resp.data
           this.setState({
             name,
@@ -72,6 +74,7 @@ class MovieDetails extends React.Component {
             clips,
             status,
             trailers,
+            iconUrl,
             loading: false
           })
         })
@@ -83,94 +86,64 @@ class MovieDetails extends React.Component {
 
   fetchMovieDetails(id) {
     // eslint-disable-next-line
-    return Axios.get(`http://localhost:9090/v1/movies/${id}/`)
-    // return new Promise((resolve, reject) => {
-    //   setTimeout(function() {
-    //     let movieDetail = {
-    //       data: {
-    //         id: id ? id : 1,
-    //         name: 'Kabali',
-    //         synopsis:
-    //           ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tortor est, feugiat sit amet sagittis nec, viverra vehicula orci. Sed pulvinar imperdiet nunc vel fringilla. In ac facilisis orci. Ut suscipit nisl scelerisque elit finibus, sed auctor velit placerat. Mauris et lacus in felis finibus dictum vel non mauris. Integer feugiat augue vitae mauris ultricies sodales. Nam semper tincidunt viverra. Aliquam pellentesque dolor nec tortor semper, sed rhoncus magna tincidunt.',
-    //         rating: 5,
-    //         experiences: 'RDX, Dolby Atmos, SUB',
-    //         bannerUrl:
-    //           'https://img.spicinemas.in/resources/images/movies/kabali/1000x320.jpg',
-    //         listingType: 'now showing',
-    //         stills: [
-    //           {
-    //             url:
-    //               'https://img.spicinemas.in/resources/images/movies/kabali/150x207.jpg'
-    //           }
-    //         ],
-    //         trailers: [
-    //           {
-    //             url: 'https://www.youtube.com/watch?v=9mdJV5-eias'
-    //           }
-    //         ]
-    //       }
-    //     }
-
-    //     resolve(movieDetail)
-    //   }, 3000)
-    // })
+    return Axios.get(`http://localhost:9090/v1/movies/${id}/`);
+  
   }
   render() {
     const { classes } = this.props
     if (this.state.loading) {
       return (
-
-        <div style={{height:'100vh',marginTop:'100px'}}>
-          Loading...
-        </div>
+        <div style={{ height: '100vh', marginTop: '100px' }}>Loading...</div>
       )
     }
     return (
       <div className={classes.root}>
         <Grid container spacing={24}>
           <Grid item xs={12}>
-            <img width={1500} src={this.state.bannerUrl.toLocaleLowerCase()} />
+            <img width={1500} src={this.state.bannerUrl} />
           </Grid>
           <Grid item xs={8}>
             <div className={classes.paper}>
               <Typography
                 gutterBottom
-                align='left'
+                align="left"
                 style={{ fontSize: '20px', fontWeight: 'bold' }}
-                variant='headline'
+                variant="headline"
               >
                 Synopsis
               </Typography>
-              <Typography align='left' style={{ fontSize: '15px' }}>
+              <Typography align="left" style={{ fontSize: '15px' }}>
                 <p>{this.state.synopsis}</p>
               </Typography>
             </div>
-            <Grid item xs={4}>
-              <Button
-                variant='contained'
-                color='secondary'
-                className={classes.button}
-              >
-                <Typography
-                  variant='h6'
-                  style={{
-                    color: 'white',
-                    fontWeight: 'bold',
-                    fontSize: '16px'
-                  }}
+            <Link to={'/book/${chennai}/kabali'}>
+              <Grid item xs={4}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  className={classes.button}
                 >
-                  BOOK A TICKET
-                </Typography>
-              </Button>
-            </Grid>
+                  <Typography
+                    variant="h6"
+                    style={{
+                      color: 'white',
+                      fontWeight: 'bold',
+                      fontSize: '16px'
+                    }}
+                  >
+                    BOOK A TICKET
+                  </Typography>
+                </Button>
+              </Grid>
+            </Link>
           </Grid>
           <Grid item xs={4}>
             <Paper className={classes.paper}>
               <Typography
                 gutterBottom
-                align='left'
+                align="left"
                 style={{ fontSize: '20px', fontWeight: 'bold' }}
-                variant='headline'
+                variant="headline"
               >
                 Trailers and Clips
               </Typography>
@@ -196,15 +169,17 @@ class MovieDetails extends React.Component {
             <Paper className={classes.paper}>
               <Typography
                 gutterBottom
-                align='left'
+                align="left"
                 style={{ fontSize: '20px', fontWeight: 'bold' }}
-                variant='headline'
+                variant="headline"
               >
                 Stills
               </Typography>
               <Layout col={3}>
                 {this.state.stills.map((still, index) => {
-                  return <img key={index} src={still.url.toLocaleLowerCase()} />
+                  return (
+                    <img key={index} src={still.url} />
+                  )
                 })}
               </Layout>
               <YoutubeDialogue

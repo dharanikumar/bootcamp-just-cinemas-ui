@@ -10,6 +10,7 @@
     "bootstrap": "3",
     "chai": "^4.2.0",
     "change-case": "^3.0.2",
+    "date-format": "^2.0.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.9.1",
     "history": "^4.7.2",
